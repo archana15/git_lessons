@@ -1,0 +1,344 @@
+GIT 
+    keeos track of the changes 
+    aka : verison control system
+
+History -  versions that date back git hub 
+
+    1. source code control system - SCCS
+        -free with unix
+    
+    2. revision control system - RCS 
+        -changes versions were stores as snapshots 
+
+    Drawbacks of SCCS and RCS :
+        -can track changes in a single file at a time 
+        i.e, no multiple users and no concurrency 
+
+    3. concurrent version system  - CVS 
+        -multi-user repositories 
+        i.e, can make changes concurrently 
+    
+    4. apache subversion - SVN
+        - faster than CVS
+        - can track text + images
+        - can watch files and Directories 
+            * it can track the changes made in the file even if the name of the file is changed 
+        
+    5. Bitkeeper - SCM
+        - distributed version control 
+        - community verion : owned by a private company 
+        - initially free, so linux started using it but later wasn't free 
+        therefore linus thorvalds developed GIT-hub
+    
+    6. GIT
+        - it is a distributed version control system 
+        - faster
+        - safer
+        - free
+        - Linus thorvalds
+        
+
+DISTRIBUTED VERSION CONTROL SYSTEM :
+
+    previous systems :
+        they had a central repository and they would store any changes in it, 
+        it was up to the user to pull down the changes 
+
+    GIT
+    - impotant feature of GIT 
+    - different users can maintain their own repositories instead of having one single central repository
+    - changes are stored in sets/patches
+    - helps us trace the changes instead of the versions of the documents
+    - changed sets are discreate units
+    - changed sets can be exchanged between the repositories
+
+    eg:
+        document : doc
+        changed sets : A, B, C, D, E, F 
+
+        repository1 : A B C D E F
+        repository2 : A B C D
+        repository3 : A B C E 
+        repository4 : A B E F 
+
+        here, no repository is the main one, we can add a new set G into repository3 and share it in repository4
+        w/o having to go to a central repository
+
+        in CVS:
+            we had to upload a changed set to a central server and then other users had to pull down the changes
+            to update the version of theri files 
+
+    "master repository" in git - just convention,
+                                to tell everyone to submit their chsnges to this repository 
+
+    - we could have multiple repository and each of them could have different versions of a file, 
+    we could all contribute to them. 
+    
+    - all repositories are considered equal in GIT 
+
+    Advantage of the above :
+    - no need to communicate with the central server 
+    - therefore, faster
+    - no need to have network access to submit changes 
+    - no single point failure : if something happens to the central repository works can still be done 
+    - encourages participation and forking of projects
+    eg, in an open source project if you don't like something you can have your own version and start working independently 
+    - developers can work independently 
+    - one can submit changes for inclusion or rejection 
+    
+    
+1. installation :
+    2 ways : 
+        1. GIT installer : 
+            go to https//git-scm.com (scm -> source code manager) 
+
+        2. Homebrew :
+            brew install git
+    GIT : software 
+    GIT-hub : is a website
+ 
+2. confuguration :     
+    -git config --name "archana kalburgi"
+    -git congig --email "archanakablurgi@gmail.com"
+    -man git help  
+    - to get tab key to complete a word
+
+3. initialize a git repository 
+    - git init (init -> initialize) 
+    
+    where git stores files that it uses for it's project :
+        - create a folder in Documents -> "first_git_project"
+        - cd to the folder and initialize it 
+        - initializing the folder by
+        Archanas-MacBook-Air:first_git_project archana$ git init
+        Initialized empty Git repository in /Users/archana/Documents/first_git_project/.git/
+     
+        - after initializing the folder it creates a .git directory inside that folder 
+        Archanas-MacBook-Air:first_git_project archana$ ls -la
+        total 0
+        drwxr-xr-x   3 archana  staff   96 Apr  5 14:08 .
+        drwx------+  9 archana  staff  288 Apr  5 14:06 ..
+        drwxr-xr-x  10 archana  staff  320 Apr  5 14:08 .git
+
+        - .git will be invisible because it's a dot(.) file but it is there, it is a HIDDEN FILE
+        - . :current directory 
+        - .. : parent directory 
+
+        - taking a look inside .git 
+        Archanas-MacBook-Air:first_git_project archana$ ls -la .git
+        total 24
+        8 -rw-r--r--   1 archana  staff   23 Apr  5 14:08 HEAD
+        0 drwxr-xr-x   2 archana  staff   64 Apr  5 14:08 branches
+        8 -rw-r--r--   1 archana  staff  137 Apr  5 14:08 config
+        8 -rw-r--r--   1 archana  staff   73 Apr  5 14:08 description
+        0 drwxr-xr-x  13 archana  staff  416 Apr  5 14:08 hooks
+        0 drwxr-xr-x   3 archana  staff   96 Apr  5 14:08 info
+        0 drwxr-xr-x   4 archana  staff  128 Apr  5 14:08 objects
+        0 drwxr-xr-x   4 archana  staff  128 Apr  5 14:08 refs
+
+        - these are the various files and directories inside of it, git uses these for tracking  
+        eg : branches keeps the track of all the branches that we create 
+
+        - to see what's in config file : 
+        Archanas-MacBook-Air:first_git_project archana$ cat .git/config
+        [core]
+            repositoryformatversion = 0
+            filemode = true
+            bare = false
+            logallrefupdates = true
+            ignorecase = true
+            precomposeunicode = true
+
+        - if this .git directory is removed then there will be no tracking of the project
+        this kees track of the folder 
+        in SVN, in every file tracker is put if we want the directory to not to be tracked we have to delete it from all folder 
+
+        - .git contains everything that git knows erasing it will remove everthing git knows
+
+
+4. making the first commit :
+    1. adding a file :
+
+        git add .
+        - . is the sort cut for the current directory 
+        - git, add all the changes in the current directory 
+        - it just add it's not tracking those changes, not made it permanent  
+        - in order to track them, we need to commit them 
+
+        git commit -m "<add_your_message>"
+        - -m : message 
+        - tis will commit and track all the message forever 
+        Archanas-MacBook-Air:first_git_project archana$ git commit -m "Initial commit"
+        [master (root-commit) 29f6b20] Initial commit
+        1 file changed, 1 insertion(+)
+        create mode 100644 first_file.txt
+
+    steps :
+        1. make changes
+        2. add the changes 
+        3. commit the changes to a repository with a message 
+
+5. writing commit message :
+    - initial single line followed by a short summary 
+    - this should contain a short summary of what the changes are 
+    - keep each line<72 words, other's will be viewing in different devices
+    - use present tense not past tense because the commit msg is a label to what is inside 
+    eg :
+        incorrect msg:
+            I fixed a bug
+        correct msg :
+            this fixes a bug 
+    - bullet point : asteriks or hyphens or tracking number 
+
+6. view the commit log : 
+    "how to view the commits that have been made to the git projects"
+    
+    git log 
+    Archanas-MacBook-Air:first_git_project archana$ git log 
+    commit 29f6b20b28bb9acbf140c26c6ba68694b5153a9c (HEAD -> master)
+    Author: Archana Kalburgi <archanakalburgi@gmail.com>
+    Date:   Sun Apr 5 16:06:13 2020 +0530
+
+        Initial commit
+
+    29f6b20b28bb9acbf140c26c6ba68694b5153a9c -> unique commit ID 
+
+    git help log 
+    - enlists all the options available with log 
+    eg:
+    1. git log -n 5 
+    - this will show the 5 most recent commits made 
+    
+    2. git log --since=2019-01-01 or git log --until=2010-01-01
+    - will show all the commits that have made since 01-01-2019 
+
+    3. git log --author="Archana"
+    - shows commits made by Archana
+
+    4. git log --grep="Init" 
+    - grep - globally search for reqular expresion.
+    - finds any commit with the help of message 
+    - this will find a commit with message that has "Init" string in it 
+
+    Archanas-MacBook-Air:first_git_project archana$ git log --grep="Init" 
+    commit 29f6b20b28bb9acbf140c26c6ba68694b5153a9c (HEAD -> master)
+    Author: Archana Kalburgi <archanakalburgi@gmail.com>
+    Date:   Sun Apr 5 16:06:13 2020 +0530
+
+        Initial commit
+
+KEY CONCEPTS OF GIT :
+
+1. THE THREE TREES ARCHITECTURE :
+    - when we have to move out the copies from one repository to a working repository -> "we check out the copies"
+    - sfter making changes we commit those changes back to the repository 
+    
+    - usually :
+    there is two stage architecture : 
+            repository
+            working 
+        
+        process:
+            working 
+                commit 
+            repository 
+        we have check out the copies of newly commited copies we have to be updated with the newest versions 
+    
+    - in GIT hub :
+            repository
+            staging index
+            working
+
+        two step process to commit changes 
+            working 
+                add
+            staging index 
+                commit 
+            repository 
+        
+        we add out changes to staging index and then commited it to the repository 
+        we can also directly commit the changes to the repository 
+
+        but with this architecture we can make changes to 10 differet files in the working copy 
+        and then can selectively commit 5 of the changes as one set  
+        that's why it's called staging 
+
+        same with checking out changes :
+        pull from repository to staging index and then to working directory 
+
+2. WORKFLOW OF THREE TREE ARCHITECTURE:
+
+    repository 
+
+    stagging index
+          ^
+          |
+     git add file.txt
+
+    working -> (file.txt - changed set A)
+
+
+    repository 
+        ^
+        |
+      git commit 
+ 
+    stagging index -> (file.txt - changed set A)
+
+    working 
+
+HOW GIT LABELS AND REFERS TI ITS COMMITS USING HASH VALUES :
+    - git generates a checksum to each of the changes (A,B,C etc)
+    - checksum -> hashvalue 
+    - checksum :
+        - a number created by taking in data & feeding it to a mathemetical algorithm 
+        - so, checksum converts a data into a number 
+        - the same data put into the same methematical algorithm always returns the same number/checksum
+        - it gurantees data integrity 
+    - everytime we make change the checksum value changes
+    - git uses SHA-1 hash algorithm 
+    - SHA value : -> 
+        hash value of the commit 
+        40-character hexadecimal string 
+    - we can't change the commit message,the commit author, the parent of the commit 
+    without changing its SHA value
+
+HEAD POINTER IN GIT :
+    - it's a reference variable 
+    - it references/points to a certain commit to a repository 
+    - as we make changes/commits the ponter moves and points to the new commit 
+    - HEAD always points to the tip of the branch in our repository 
+    - very useful while dealing with branches 
+    - new branches -> to create a new set of code from what we're working on,separate from master branch
+    when we make new commit to a new branch the HEAD moves to the new commit 
+    - we can move HEAD from master to branch and vice versa 
+    - git will track the movement of the HEAD 
+    
+    Archanas-MacBook-Air:first_git_project archana$ ls -la .git 
+    total 40
+    drwxr-xr-x  13 archana  staff  416 Apr  5 16:06 .
+    drwxr-xr-x   4 archana  staff  128 Apr  5 15:59 ..
+    -rw-r--r--   1 archana  staff   15 Apr  5 16:06 COMMIT_EDITMSG
+    -rw-r--r--   1 archana  staff   23 Apr  5 14:08 HEAD
+    drwxr-xr-x   2 archana  staff   64 Apr  5 14:08 branches
+    -rw-r--r--   1 archana  staff  137 Apr  5 14:08 config
+    -rw-r--r--   1 archana  staff   73 Apr  5 14:08 description
+    drwxr-xr-x  13 archana  staff  416 Apr  5 14:08 hooks
+    -rw-r--r--   1 archana  staff  145 Apr  5 16:06 index
+    drwxr-xr-x   3 archana  staff   96 Apr  5 14:08 info
+    drwxr-xr-x   4 archana  staff  128 Apr  5 16:06 logs
+    drwxr-xr-x   7 archana  staff  224 Apr  5 16:06 objects
+    drwxr-xr-x   4 archana  staff  128 Apr  5 14:08 refs
+
+    Archanas-MacBook-Air:first_git_project archana$ cat .git/HEAD
+    ref: refs/heads/master
+
+    Archanas-MacBook-Air:first_git_project archana$ cat .git/refs/heads/master
+    29f6b20b28bb9acbf140c26c6ba68694b5153a9c
+
+    Archanas-MacBook-Air:first_git_project archana$ git log
+    commit 29f6b20b28bb9acbf140c26c6ba68694b5153a9c (HEAD -> master)
+    Author: Archana Kalburgi <archanakalburgi@gmail.com>
+    Date:   Sun Apr 5 16:06:13 2020 +0530
+
+        Initial commit
