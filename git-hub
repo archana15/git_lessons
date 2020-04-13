@@ -102,6 +102,8 @@ DISTRIBUTED VERSION CONTROL SYSTEM :
     -git congig --email "archanakablurgi@gmail.com"
     -man git help  
     - to get tab key to complete a word
+    - to add editor :
+        git config --global core.editor "vim"
 
 3. initialize a git repository 
     - git init (init -> initialize) 
@@ -342,3 +344,95 @@ HEAD POINTER IN GIT :
     Date:   Sun Apr 5 16:06:13 2020 +0530
 
         Initial commit
+
+ADDING FILES TO GIT REPOSITORY :
+    git status
+    git add <filename>
+    git commit <filename>
+
+    to add all the files in the directory:
+        git add .
+        git commit
+
+VIEW CHANGES :
+    - git status 
+
+    Archanas-MacBook-Air:first_git_project archana$ git status
+    On branch master
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+        modified:   git-hub
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    - "status" command tells us if there are any changes but doesn't tell what the changes was 
+
+    - to know what changes are made we use diff program as below
+
+    Archanas-MacBook-Air:first_git_project archana$ git diff
+    diff --git a/git-hub b/git-hub
+    index 70c2aba..6747418 100644
+    --- a/git-hub
+    +++ b/git-hub
+    @@ -102,6 +102,8 @@ DISTRIBUTED VERSION CONTROL SYSTEM :
+        -git congig --email "archanakablurgi@gmail.com"
+        -man git help  
+        - to get tab key to complete a word
+    +    - to add editor :
+    +        git config --global core.editor "vim"
+    
+    3. initialize a git repository 
+        - git init (init -> initialize) 
+    @@ -341,4 +343,16 @@ HEAD POINTER IN GIT :
+        Author: Archana Kalburgi <archanakalburgi@gmail.com>
+        Date:   Sun Apr 5 16:06:13 2020 +0530
+    
+    -        Initial commit
+    \ No newline at end of file
+    +        Initial commit
+    +
+    +ADDING FILES TO GIT REPOSITORY :
+    +    git status
+    +    git add <filename>
+    +    git commit <filename>
+    +
+    +    to add all the files in the directory:
+    +        git add .
+    +        git commit
+    :
+
+    - once we added the file for the staging index "git diff" doesn't show the changes made to the files 
+    in the staging index 
+    to see those changes use the following command :
+
+    git diff -- staged 
+            or
+    git diff --cached
+
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes to be committed:
+    (use "git restore --staged <file>..." to unstage)
+        modified:   first_file.txt
+
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+        modified:   git-hub
+
+    Archanas-MacBook-Air:first_git_project archana$ git diff --staged 
+    diff --git a/first_file.txt b/first_file.txt
+    index ce770ca..330e23c 100644
+    --- a/first_file.txt
+    +++ b/first_file.txt
+    @@ -1 +1,2 @@
+    -My first file 
+    \ No newline at end of file
+    +My first file
+    +Adding new line to understand tracking 
+    \ No newline at end of file
+
+    
+
+
