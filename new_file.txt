@@ -14,3 +14,5 @@ def ngram_vectorize(train_texts, train_labels, val_texts):
         x_train, x_val: vectorized training and validation texts
     """
 
+Learn how to use Git, the popular open-source version control software, to manage the source code for almost any project. In this course, Kevin Skoglund explores the fundamental concepts behind version control systems and the Git architecture. Using a step-by-step approach, he shows how to install Git and presents the commands that enable efficient code management. Learn how to add, change, and delete files in the repository; view a log of previous commits; and compare versions of a file. Plus, see how to undo changes to files and ignore certain files in a Git repository. 
+
