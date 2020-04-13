@@ -433,6 +433,143 @@ VIEW CHANGES :
     +Adding new line to understand tracking 
     \ No newline at end of file
 
+DELETING FILE :
+
+- Deleting untracked file is not a big deal
+
+Archanas-MacBook-Air:first_git_project archana$ git status 
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   first_file.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git-hub
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	file_to_delete.txt
+	file_to_delete2.txt
+
+Archanas-MacBook-Air:first_git_project archana$ git add .
+Archanas-MacBook-Air:first_git_project archana$ git commit -m "add files to delete soon"
+[master 7a10ceb] add files to delete soon
+ 4 files changed, 97 insertions(+), 2 deletions(-)
+ create mode 100644 file_to_delete.txt
+ create mode 100644 file_to_delete2.txt
+
+two different ways to delete a file :
+    1. - move the file to trash in your pc 
+       - add the change :   git rm file_to_delete.txt
+       - commit the change 
+    
+    Archanas-MacBook-Air:first_git_project archana$ git rm file_to_delete.txt
+    rm 'file_to_delete.txt'
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes to be committed:
+    (use "git restore --staged <file>..." to unstage)
+        deleted:    file_to_delete.txt
+    Archanas-MacBook-Air:first_git_project archana$ git commit -m "delete first file"
+    [master 142abf9] delete first file
+    1 file changed, 0 insertions(+), 0 deletions(-)
+    delete mode 100644 file_to_delete.txt
+    Archanas-MacBook-Air:first_git_project archana$ git status
+    On branch master
+    nothing to commit, working tree clean  
+
+    2. - telling git to remove it 
+        - this method permanently deletes the file, it's not even in our trash can 
+        - a unix command removes it 
+        
+        Archanas-MacBook-Air:first_git_project archana$ git rm file_to_delete2.txt
+        rm 'file_to_delete2.txt'
+        Archanas-MacBook-Air:first_git_project archana$ git status 
+        On branch master
+        Changes to be committed:
+        (use "git restore --staged <file>..." to unstage)
+            deleted:    file_to_delete2.txt
+
+        Archanas-MacBook-Air:first_git_project archana$ git commit 
+        [master ca34597] deletes seconf file by rm command  Please enter the commit message for your changes. Lines starting
+        1 file changed, 0 insertions(+), 0 deletions(-)
+        delete mode 100644 file_to_delete2.txt
+        Archanas-MacBook-Air:first_git_project archana$ git status 
+        On branch master
+        nothing to commit, working tree clean
+
+        - so this method removes and adds the changes to the git
+        - we do not have to delete it manually and then add the changes 
+        - ???????? there is copy in the repository ??????
+
+3. MOVING AND RENAMING FILES 
+    -  once we rename an existing file the git shows the following 
+    Archanas-MacBook-Air:first_git_project archana$ git status
+    On branch master
+    Changes not staged for commit:
+    (use "git add/rm <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+        deleted:    first_file.txt
+
+    Untracked files:
+    (use "git add <file>..." to include in what will be committed)
+        primary_file.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    - this means that git sees it as one file was deleted 
+    and another file "primary_file" was added 
+    instead of simply calling it as renaming 
+
+    - once the changes are added git recognises that the file was renamed 
+    
+    Archanas-MacBook-Air:first_git_project archana$ git add primary_file.txt
+    Archanas-MacBook-Air:first_git_project archana$ git rm first_file.txt
+    rm 'first_file.txt'
+    Archanas-MacBook-Air:first_git_project archana$ git status
+    On branch master
+    Changes to be committed:
+    (use "git restore --staged <file>..." to unstage)
+        renamed:    first_file.txt -> primary_file.txt
+
+    another way of renaming the file is through command line by using the "mv" command
+
+    Archanas-MacBook-Air:first_git_project archana$ git mv fundamental_file.txt primary_file.txt
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes to be committed:
+    (use "git restore --staged <file>..." to unstage)
+        renamed:    fundamental_file.txt -> primary_file.txt
+
+    - it's just one step to rename 
+    - we can also move a file from one folder to another thorugh command line using "mv command"
+
+SHORTCUTS :
+
+- git commit -a 
+  git commit -all 
+
+  the aboive commits all the changes made to the files that were tracked by git, we could skip staging 
+  that is, <git add> step
+
+HOW TO VIEW A PREVIOUS COMMIT :
+    - git diff --color-words
+        this will change the color of the text that's been changed
+        instead of "+/-" symbols 
+        (use f or b to navigate)
+
+    steps :
+    1. use git log command to view all the commits made 
+        this will list all the commits made with a sha value 
+    2. git show 84a92579
+        use git show <first 6-8 characters of sha value> command to see that particular change 
+
+    git show 84a92579 --color-words 
+    shows the chenages in changed color 
+
+COMPARING THE COMMITS:
     
 
 
