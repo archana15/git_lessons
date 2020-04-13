@@ -551,7 +551,7 @@ SHORTCUTS :
 - git commit -a 
   git commit -all 
 
-  the aboive commits all the changes made to the files that were tracked by git, we could skip staging 
+  the above commits all the changes made to the files that were tracked by git, we could skip staging 
   that is, <git add> step
 
 HOW TO VIEW A PREVIOUS COMMIT :
@@ -570,6 +570,94 @@ HOW TO VIEW A PREVIOUS COMMIT :
     shows the chenages in changed color 
 
 COMPARING THE COMMITS:
+    git log
+    git diff <old sha's value>..<new commit's sha value> or
+    git diff <old sha value>..HEAD 
+
+    --color-words can be used 
+
+- don't add all the changes at once add them seprately with atomic commits so that 
+the changes made are clear with messages attached to them 
+
+UNDO CHANGES IN WORKING DIRECTORY :
+
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+        modified:   new_file.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+    Archanas-MacBook-Air:first_git_project archana$ git checkout -- new_file.txt
+
+    - so the checkout command resotes the previous version of that file that is the one that was in repository
+    - helpful in resoring the previous version and get rid of the new changes 
+
+HOW TO UNSTAGE THE FILES :
+    - this is to make the repository match the staging index 
+
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+        modified:   new_file.txt
+
+    no changes added to commit (use "git add" and/or "git commit -a")
     
+    
+    Archanas-MacBook-Air:first_git_project archana$ git add .
+    
+    
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes to be committed:
+    (use "git restore --staged <file>..." to unstage)
+        modified:   new_file.txt
 
+    
+    
+    Archanas-MacBook-Air:first_git_project archana$ git reset HEAD new_file.txt
+    Unstaged changes after reset:
+    M	new_file.txt
+    
+    
+    Archanas-MacBook-Air:first_git_project archana$ git status 
+    On branch master
+    Changes not staged for commit:
+    (use "git add <file>..." to update what will be committed)
+    (use "git restore <file>..." to discard changes in working directory)
+        modified:   new_file.txt
 
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    Command used:
+        git reset HEAD new_file.txt
+
+AMMENDING CHANGES THAT ARE ALREADY THEIR IN THE REPOSITORY :
+    - amend option that you use with commit says take whatever was in the old commit, 
+    bring it back down to staging, 
+    add whatever staging has into it, and then 
+    let's recommit that. 
+    I'm going to amend it with those new changes.
+
+    -  It's taking what's in the LAST commit, 
+    bringing it down, 
+    adding your new stuff to it, and 
+    recommitting it, and 
+    generating a new SHA in the process.
+
+    you make changes 
+    add them 
+    while commiting use amend command as 
+        git commit --amend -m "<msg>"
+    again use amend to change the message of the comit 
+        git commit --amend -m "<msg>"
+
+    - it can only cange the last commit msg 
+    - git allows you amending only hte most resent commit 
+
+RETRIVING THE OLDER VERSION : 
+    - if we want to undo some changes that we've made, we have to make those edits into new commits
+    - 
